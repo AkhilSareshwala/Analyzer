@@ -5,11 +5,11 @@ import os
 import re
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
-
+import streamlit as st
 load_dotenv()
 
-SCRAPER_API_KEY = os.getenv("SCRAPER_API_KEY")
-BASE_URL = "https://api.scraperapi.com/"
+SCRAPER_API_KEY = os.getenv("SCRAPER_API_KEY") or st.secrets.get("SCRAPER_API_KEY")
+BASE_URL = "https://api.scraperapi.com/" 
 STRUCTURED_URL = "https://api.scraperapi.com/structured/amazon/product"
 
 

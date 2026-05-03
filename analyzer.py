@@ -2,8 +2,10 @@ import google.generativeai as genai
 import os
 import json
 import re
-
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+import requests
+import streamlit as st
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY") or st.secrets.get("GEMINI_API_KEY")
+OPEN_ROUTER_KEY = os.getenv("OPEN_ROUTER_KEY") or st.secrets.get("OPEN_ROUTER_KEY")
 
 
 def setup_gemini():
@@ -226,7 +228,7 @@ Return ONLY valid JSON (no markdown):
 
 
 def chat_with_data(user_message: str, context: dict, history: list) -> str:
-    """AI assistant that answers questions about the analysis."""
+    """AI assistant that answers questions about the analysis using OpenRouter."""
     history_text = ""
     for msg in history[-6:]:  # last 3 turns
         role = "User" if msg["role"] == "user" else "Assistant"
@@ -259,9 +261,22 @@ User: {user_message}
 Reply in 2-4 sentences max. Be direct, specific, and actionable. No generic advice."""
 
     try:
-        model = setup_gemini()
-        response = model.generate_content(prompt)
-        return response.text.strip()
+        response = requests.post(
+            url="https://openrouter.ai/api/v1/chat/completions",
+            headers={
+                "Authorization": f"Bearer {OPEN_ROUTER_KEY}",
+                "Content-Type": "application/json",
+            },
+            json={
+                "model": "openai/gpt-oss-120b:free",
+                "messages": [{"role": "user", "content": prompt}],
+                "temperature": 0.7,
+                "max_tokens": 300,
+            }
+        )
+        response.raise_for_status()
+        result = response.json()
+        return result["choices"][0]["message"]["content"].strip()
     except Exception as e:
         return f"Sorry, I couldn't process that question. Error: {e}"
 

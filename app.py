@@ -173,7 +173,7 @@ h1,h2,h3 { font-family: 'Syne', sans-serif !important; }
 st.markdown("""
 <div class="main-header">
     <h1>🔬 Amazon Market Intelligence</h1>
-    <p>Drop any Amazon listing. Get real review analysis + competitive intelligence + trend data + a Pixii-ready creative brief.</p>
+    <p>Drop any Amazon listing. Get competitive intelligence + trend data + a Pixii-ready creative brief.</p>
 </div>
 """, unsafe_allow_html=True)
 
