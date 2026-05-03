@@ -2,17 +2,6 @@
 
 > Drop any Amazon listing URL → Get real review analysis + competitive intelligence + Google Trends + a Pixii-ready creative brief + AI chat analyst.
 
-## What's new vs v1
-| Feature | v1 (original) | v2 (this) |
-|---|---|---|
-| Review scraping | ❌ None | ✅ 50–150 real reviews per product |
-| AI model | Gemini 2.5 Flash | Gemini 2.5 Flash |
-| Purchase criteria | Inferred from titles | **From real review text** |
-| Review sentiment chart | ❌ | ✅ Donut with star breakdown |
-| Competitor weaknesses | ❌ | ✅ From their bad reviews |
-| AI Chat assistant | ❌ | ✅ Ask anything about the market |
-| Configurable depth | ❌ | ✅ Choose review pages + competitor count |
-
 ## Setup
 
 ```bash
